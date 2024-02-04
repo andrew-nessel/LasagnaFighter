@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmwpeoky4itsn"]
+
+[ext_resource type="PackedScene" uid="uid://dyisj7mrmwb6t" path="res://scenes/player.tscn" id="1_vmqg3"]
+[ext_resource type="Script" path="res://scripts/InputHandler.gd" id="2_v1j6r"]
+[ext_resource type="Script" path="res://scripts/FightingHandler.gd" id="3_is0v8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("2_v1j6r")
+
+[node name="Fighting" type="Node" parent="." node_paths=PackedStringArray("player1", "player2", "inputManager")]
+script = ExtResource("3_is0v8")
+player1 = NodePath("../Player1")
+player2 = NodePath("../Player2")
+inputManager = NodePath("../Input")
+
+[node name="Player1" parent="." instance=ExtResource("1_vmqg3")]
+position = Vector2(913, 502)
+
+[node name="Player2" parent="." instance=ExtResource("1_vmqg3")]
