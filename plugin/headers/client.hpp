@@ -2,6 +2,8 @@
 #define CLIENT_H
 
 #include "socket.hpp"
+#include "response.hpp"
+#include "util.hpp"
 
 class Client {
 
@@ -17,11 +19,13 @@ public:
 	Client();
 	~Client();
 
-	void start_client();
+	Response start_client();
 	void close_client();
-	void set_client(long addr, int port);
-	char* receive_message();
-	void send_message(char msg[]);
+	void set_client(const char * addr, int port);
+	Response receive_message();
+	Response send_message(const char * msg);
+	const char* get_server_address();
+	int get_server_port();
 };
 
 

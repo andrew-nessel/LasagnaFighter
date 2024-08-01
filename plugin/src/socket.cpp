@@ -2,6 +2,8 @@
 
 #include <winsock2.h>
 
+#pragma comment(lib, "Ws2_32.lib")
+
 Socket::Socket(){
     sockfd = -1;
 }
@@ -38,6 +40,10 @@ int Socket::bind_socket(SOCKADDR* server_addr, int server_len){ // Bind the sock
     return 0;
 }
 
-int Socket::get_sockfd(){
+SOCKET Socket::get_sockfd(){
     return sockfd;
 }
+
+// int Socket::get_sockfd(){
+//     return sockfd;
+// }

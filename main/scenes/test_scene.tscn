@@ -15,7 +15,11 @@ player1 = NodePath("../Player1")
 player2 = NodePath("../Player2")
 inputManager = NodePath("../Input")
 
-[node name="Player1" parent="." instance=ExtResource("1_vmqg3")]
+[node name="Player1" parent="." node_paths=PackedStringArray("characterBody") instance=ExtResource("1_vmqg3")]
 position = Vector2(913, 502)
+characterBody = NodePath("Area2D")
 
-[node name="Player2" parent="." instance=ExtResource("1_vmqg3")]
+[node name="Player2" parent="." node_paths=PackedStringArray("characterBody") instance=ExtResource("1_vmqg3")]
+characterBody = NodePath("Area2D")
+
+[node name="RollbackNetwork" type="RollbackNetwork" parent="."]

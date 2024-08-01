@@ -24,13 +24,7 @@ android.release.arm64 = "res://bin/libgdexample.android.template_release.arm64.s
 
 [dependencies]
 
-windows.debug.x86_64 = {
-    "res://bin/libvosk.so" : ""
-}
-windows.release.x86_64 = {
-    "res://bin/libvosk.so" : ""
-}
 
 [icons]
 
-GDExample = "res://icons/networking.svg"
+RollbackNetwork = "res://icons/networking.svg"

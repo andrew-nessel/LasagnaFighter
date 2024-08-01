@@ -16,7 +16,8 @@
 class Socket {
 
 private:
-    int sockfd; 
+    // SOCKET sockfd; 
+    int sockfd;
 
 public:
 	Socket();
@@ -26,7 +27,8 @@ public:
     void close_socket();
     int bind_socket(SOCKADDR* server_addr, int server_len);
 
-    int get_sockfd();
+    SOCKET get_sockfd();
+    // int get_sockfd();
 };
 
 
