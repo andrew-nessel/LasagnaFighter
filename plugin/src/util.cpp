@@ -11,7 +11,8 @@ godot::String Util::CStringToString(const char* str){
 
 char* Util::getLastWSAError(){
     // wchar_t *s = NULL;
-    LPWSTR pBuffer = NULL;
+    // LPWSTR pBuffer = NULL;
+    wchar_t *s = NULL;
     // char msgbuf [256];
     // msgbuf [0] = '\0'; 
     // FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, 
@@ -20,19 +21,19 @@ char* Util::getLastWSAError(){
     //            pBuffer, 0, NULL);
 
     FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, 
-    NULL, GetLastError(),
+    NULL, WSAGetLastError(),
     MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-    pBuffer, 0, NULL);
+    (LPWSTR)&s, 0, NULL);
 
     // GetLastError()
-    if(pBuffer == NULL){
+    if(s == NULL){
         return " error not found";
     }
-    static char buffer[32];
+    static char buffer[256];
     int ret;
-    ret = wcstombs(buffer, pBuffer, sizeof(buffer) );
-    if (ret==32){
-        buffer[31]='\0';
+    ret = wcstombs(buffer, s, sizeof(buffer) );
+    if (ret==256){
+        buffer[255]='\0';
     }
     return buffer;
 }

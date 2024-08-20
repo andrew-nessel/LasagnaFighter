@@ -159,21 +159,23 @@ void RollbackNetwork::receive_loop(){
 		String s("");
 		s = receive_message();
 		if (s == ""){
+			call_deferred("emit_signal", "message_received", s, "nothing recieved....");
 			continue;
 		}
-		emit_signal("message_received", s, "");
+		call_deferred("emit_signal", "message_received", s, "");
 	}
 }
 
 String RollbackNetwork::receive_message(){
 	// emit_signal("client_started", true, "");
 	if(client == NULL){
-		emit_error("client not set up...");
+		call_deferred("emit_signal", "error", "client not set up...");
 		return "";
 	}
+	call_deferred("emit_signal", "message_received", "starting wait...", "nothing recieved....");
 	Response msg = client->receive_message();
 	if(msg.getStatus() < 0){
-		emit_error(msg.getMsg());
+		call_deferred("emit_signal", "error", Util::CStringToString(msg.getMsg()));
 		return "";
 	}
 	return String(msg.getMsg());

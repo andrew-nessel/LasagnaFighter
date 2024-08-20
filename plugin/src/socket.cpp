@@ -14,7 +14,7 @@ Socket::~Socket(){
 
 int Socket::open_socket(){
 
-    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
+    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) { 
         perror("socket creation failed"); 
         return -1;
     }
@@ -35,8 +35,8 @@ int Socket::bind_socket(SOCKADDR* server_addr, int server_len){ // Bind the sock
     { 
         perror("bind failed"); 
         return -1;
-    } 
-
+    }
+    
     return 0;
 }
 
