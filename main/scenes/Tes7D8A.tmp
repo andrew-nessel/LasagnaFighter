@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://dboek6i5pqnf1"]
+
+[ext_resource type="Script" path="res://scripts/chat.gd" id="1_5862m"]
+
+[node name="TestLobby2" type="Node2D"]
+
+[node name="DebugNode" type="Node2D" parent="." node_paths=PackedStringArray("netcode", "clientPort", "clientAddress", "message", "serverPort", "serverAddress")]
+script = ExtResource("1_5862m")
+netcode = NodePath("../RollbackNetwork")
+clientPort = NodePath("../UI/MarginContainer/VBoxContainer/PortEditText")
+clientAddress = NodePath("../UI/MarginContainer/VBoxContainer/AddressEditText")
+message = NodePath("../UI/MarginContainer/VBoxContainer/MessageEditText")
+serverPort = NodePath("../UI/MarginContainer/VBoxContainer/ServerPort")
+serverAddress = NodePath("../UI/MarginContainer/VBoxContainer/ServerAddress")
+
+[node name="RollbackNetwork" type="RollbackNetwork" parent="."]
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+offset_right = 1152.0
+offset_bottom = 642.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ServerAddress" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Server Address: "
+
+[node name="ServerPort" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Server Port: "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Address"
+
+[node name="AddressEditText" type="TextEdit" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Port"
+
+[node name="PortEditText" type="TextEdit" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "8080"
+
+[node name="CheckBox" type="CheckBox" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "LAN Connection"
+
+[node name="StartClientButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "start client"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "MSG"
+
+[node name="MessageEditText" type="TextEdit" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "hello"
+
+[node name="SendMessageButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "send msg"
+
+[connection signal="client_closed" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_client_closed"]
+[connection signal="client_started" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_client_started"]
+[connection signal="error" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_error"]
+[connection signal="message_received" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_message_received"]
+[connection signal="message_sent" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_message_sent"]
+[connection signal="toggled" from="UI/MarginContainer/VBoxContainer/CheckBox" to="DebugNode" method="_on_check_box_toggled"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/StartClientButton" to="DebugNode" method="_on_start_client_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/SendMessageButton" to="DebugNode" method="_on_send_message_button_pressed"]

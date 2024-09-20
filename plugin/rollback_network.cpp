@@ -15,6 +15,12 @@ void RollbackNetwork::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("start_receive_loop"), &RollbackNetwork::start_receive_loop);
 	ClassDB::bind_method(D_METHOD("stop_receive_loop"), &RollbackNetwork::stop_receive_loop);
 	ClassDB::bind_method(D_METHOD("set_client"), &RollbackNetwork::set_client);
+	ClassDB::bind_method(D_METHOD("set_server_local"), &RollbackNetwork::set_server_local);
+	ClassDB::bind_method(D_METHOD("get_server_local"), &RollbackNetwork::get_server_local);
+	ClassDB::add_property("RollbackNetwork", PropertyInfo(Variant::BOOL, "server_local"), "set_server_local", "get_server_local");
+	ClassDB::bind_method(D_METHOD("set_external_address"), &RollbackNetwork::set_external_address);
+	ClassDB::bind_method(D_METHOD("get_external_address"), &RollbackNetwork::get_external_address);
+	ClassDB::add_property("RollbackNetwork", PropertyInfo(Variant::BOOL, "external_address"), "set_external_address", "get_external_address");
 	ClassDB::bind_method(D_METHOD("set_server_address"), &RollbackNetwork::set_server_address);
 	ClassDB::bind_method(D_METHOD("get_server_address"), &RollbackNetwork::get_server_address);
 	ClassDB::bind_method(D_METHOD("set_server_port"), &RollbackNetwork::set_server_port);
@@ -38,7 +44,7 @@ RollbackNetwork::RollbackNetwork() : client_address("0.0.0.0"), server_address("
 	client = NULL;
 	client_port = 8080;
 	// client_address = "0.0.0.0";
-	server_port = 8080;
+	server_port = 8081;
 	// server_address = "10.0.0.0";
 	is_receiving = false;
 	rec_loop = NULL;
@@ -72,14 +78,35 @@ void RollbackNetwork::_process(double delta) {
 }
 
 void RollbackNetwork::start_client(){
+	if(client != NULL){
+		client->close_client();
+	}
 	client = new Client();
-	Response r = client->start_client();
+	client->set_local(server_local);
+	// client->set_server("127.0.0.1", server_port);
+	Response r = client->set_server("::1", server_port);
+	if(r.getStatus() == -1){
+		emit_error(String(r.getMsg()));
+		return;
+	}
+	r = client->start_client();
 	if(r.getStatus() == -1){
 		emit_error(String(r.getMsg()));
 		return;
 	}
 	server_address = String(client->get_server_address());
 	server_port = client->get_server_port();
+
+	// if(!server_local){
+	// 	r = client ->get_external_ip();
+	// 	if(r.getStatus() == -1){
+	// 		emit_error(String(r.getMsg()));
+	// 	}
+	// 	external_address = String(client->get_external_address());
+	// }else{
+	// 	external_address = "";
+	// }
+
 	emit_signal("client_started", true, "");
 }
 
@@ -91,6 +118,15 @@ void RollbackNetwork::set_client(){
 	client->set_client(Util::StringToCString(client_address), client_port);
 }
 
+void RollbackNetwork::set_server_local(boolean isLocal){
+	server_local = isLocal;
+	return;
+}
+
+bool RollbackNetwork::get_server_local(){
+	return server_local;
+}
+
 void RollbackNetwork::set_server_address(String addr){
 	server_address = addr;
 	return;
@@ -98,6 +134,15 @@ void RollbackNetwork::set_server_address(String addr){
 
 String RollbackNetwork::get_server_address(){
 	return server_address;
+}
+
+void RollbackNetwork::set_external_address(String addr){
+	external_address = addr;
+	return;
+}
+
+String RollbackNetwork::get_external_address(){
+	return external_address;
 }
 
 void RollbackNetwork::set_server_port(int p){
@@ -209,3 +254,15 @@ void RollbackNetwork::emit_error(String msg){
 // 	String s(str);
 // 	return s;
 // }
+
+//Make it so that connecting happens entirely through the godot side so less recompiling
+	//Make it so there is a button to start the client -/
+	//Make it so there is a way to change what port to bind to (?)
+	//Make it so the user can pick to bind to local or remote -/
+	//Make it so it shows external ip address -/
+	//Test to see if remote works (laptop and desktop)
+
+//Make the vertical slice
+	//Make input polling
+	//Send input polling through the client
+	//Read input polling through the client and apply it to player 2 (no delay, no rollback, no prediction)

@@ -21,3 +21,4 @@ position = Vector2(913, 502)
 [node name="Player2" parent="." instance=ExtResource("1_vmqg3")]
 
 [node name="RollbackNetwork" type="RollbackNetwork" parent="."]
+server_local = false

@@ -15,7 +15,9 @@ private:
 	void emit_error(String msg);
 	Client *client;
 	String server_address;
+	String external_address;
 	int server_port;
+	bool server_local;
 	String client_address;
 	int client_port;
 	bool is_receiving;
@@ -33,8 +35,12 @@ public:
 	void set_client();
 	void set_server_address(String addr);
 	String get_server_address();
+	void set_external_address(String addr);
+	String get_external_address();
 	void set_server_port(int p);
 	int get_server_port();
+	void set_server_local(boolean isLocal);
+	bool get_server_local();
 	void set_client_address(String addr);
 	String get_client_address();
 	void set_client_port(int p);

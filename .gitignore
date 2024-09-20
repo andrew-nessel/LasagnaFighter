@@ -17,3 +17,7 @@ mono_crash.*.json
 # Builds should be made locally
 /builds/
 /builds
+builds/libgdexample.windows.template_debug.x86_64.dll
+builds/lasangafighterbuild.pck
+builds/lasangafighterbuild.exe
+builds/lasangafighterbuild.console.exe

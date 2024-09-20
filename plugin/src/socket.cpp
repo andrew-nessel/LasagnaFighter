@@ -14,7 +14,18 @@ Socket::~Socket(){
 
 int Socket::open_socket(){
 
-    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) { 
+    // if ( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) {     
+    if ( (sockfd = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) { 
+        perror("socket creation failed"); 
+        return -1;
+    }
+
+    return 0;
+}
+
+int Socket::open_tcp_socket(){
+
+    if ( (sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 ) { 
         perror("socket creation failed"); 
         return -1;
     }
@@ -32,6 +43,18 @@ int Socket::bind_socket(SOCKADDR* server_addr, int server_len){ // Bind the sock
 
     if ( bind(sockfd, server_addr,  
             server_len) < 0 ) 
+    { 
+        perror("bind failed"); 
+        return -1;
+    }
+    
+    return 0;
+}
+
+int Socket::bind_socket_info(addrinfo * server_addr){ // Bind the socket with the server address 
+
+    if ( bind(sockfd, server_addr->ai_addr,  
+            server_addr->ai_addrlen) < 0 ) 
     { 
         perror("bind failed"); 
         return -1;

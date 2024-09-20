@@ -14,6 +14,7 @@ serverPort = NodePath("../UI/MarginContainer/VBoxContainer/ServerPort")
 serverAddress = NodePath("../UI/MarginContainer/VBoxContainer/ServerAddress")
 
 [node name="RollbackNetwork" type="RollbackNetwork" parent="."]
+server_local = false
 
 [node name="UI" type="Node2D" parent="."]
 
@@ -43,7 +44,7 @@ text = "Address"
 [node name="AddressEditText" type="TextEdit" parent="UI/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "127.0.0.1"
+text = "0:0:0:0:0:0:0:1"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -55,13 +56,13 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "8080"
 
-[node name="SetClientButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "set client"
+text = "LAN Connection"
 
-[node name="ListenButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+[node name="StartClientButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "start listen"
+text = "start client"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -82,6 +83,6 @@ text = "send msg"
 [connection signal="error" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_error"]
 [connection signal="message_received" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_message_received"]
 [connection signal="message_sent" from="RollbackNetwork" to="DebugNode" method="_on_rollback_network_message_sent"]
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/SetClientButton" to="DebugNode" method="_on_set_client_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/ListenButton" to="DebugNode" method="_on_listen_button_pressed"]
+[connection signal="toggled" from="UI/MarginContainer/VBoxContainer/CheckBox" to="DebugNode" method="_on_check_box_toggled"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/StartClientButton" to="DebugNode" method="_on_start_client_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/VBoxContainer/SendMessageButton" to="DebugNode" method="_on_send_message_button_pressed"]
