@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://citdyi8q1fn0t"]
+
+[ext_resource type="Script" path="res://scripts/create_lobby.gd" id="1_r28ax"]
+
+[node name="CreateLobby" type="Control" node_paths=PackedStringArray("spin_box")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r28ax")
+spin_box = NodePath("VBoxContainer/PlayerNumberControl/SpinBox")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 153.0
+offset_bottom = 63.0
+text = "Create Lobby"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -224.0
+offset_right = 600.0
+offset_bottom = 176.0
+grow_vertical = 2
+
+[node name="PlayerNumberControl" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PlayerNumberControl"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Number of Players"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/PlayerNumberControl"]
+layout_mode = 1
+offset_left = 150.0
+offset_right = 233.063
+offset_bottom = 31.0
+min_value = 2.0
+max_value = 8.0
+value = 2.0
+
+[node name="PublicControl" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PublicControl"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "LAN"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/PublicControl"]
+layout_mode = 1
+offset_left = 50.0
+offset_right = 94.0
+offset_bottom = 24.0
+
+[node name="CreateButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Create Lobby"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -17.0
+grow_vertical = 0
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

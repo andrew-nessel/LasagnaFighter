@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0xiyfr6wv57h"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_588cq"]
+
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("player_name_line_edit")]
+script = ExtResource("1_588cq")
+player_name_line_edit = NodePath("PlayerNameTextEdit")
+
+[node name="ServerButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Server"
+
+[node name="ClientButton" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 36.0
+offset_right = 60.0
+offset_bottom = 67.0
+text = "Client"
+
+[node name="PlayerNameTextEdit" type="TextEdit" parent="."]
+offset_left = 341.0
+offset_top = 17.0
+offset_right = 798.0
+offset_bottom = 119.0
+placeholder_text = "player name"
+
+[connection signal="pressed" from="ServerButton" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="ClientButton" to="." method="_on_client_button_pressed"]

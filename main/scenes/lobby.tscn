@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuweff05opxh8"]
+
+[ext_resource type="Script" path="res://scripts/LobbyUI.gd" id="1_srvnj"]
+[ext_resource type="PackedScene" uid="uid://cj5gnocakua3y" path="res://objects/player_slot_lobby.tscn" id="2_idxye"]
+[ext_resource type="PackedScene" uid="uid://rsnnd31xe3f8" path="res://objects/match_container.tscn" id="3_uubpt"]
+
+[node name="Lobby" type="Control" node_paths=PackedStringArray("playerSlotContainer", "playerMatchContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_srvnj")
+playerSlotObject = ExtResource("2_idxye")
+playerSlotContainer = NodePath("PlayerSlotContainer")
+playerMatchObject = ExtResource("3_uubpt")
+playerMatchContainer = NodePath("MatchesContainer")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 147.0
+offset_bottom = 73.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Lobby"
+
+[node name="PlayerSlotContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 125.0
+offset_top = -199.0
+offset_right = 325.0
+offset_bottom = 251.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="PlayerSlotLobby" parent="PlayerSlotContainer" instance=ExtResource("2_idxye")]
+layout_mode = 2
+
+[node name="MatchesContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -62.5
+offset_bottom = 62.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MatchContainer" parent="MatchesContainer" instance=ExtResource("3_uubpt")]
+layout_mode = 2
+
+[node name="DisconnectButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -17.0
+grow_vertical = 0
+text = "Disconnect"
+
+[connection signal="pressed" from="DisconnectButton" to="." method="_on_disconnect_button_pressed"]

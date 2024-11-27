@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://rsnnd31xe3f8"]
+
+[ext_resource type="Script" path="res://scripts/match_slot_lobby.gd" id="1_0skuy"]
+[ext_resource type="PackedScene" uid="uid://cj5gnocakua3y" path="res://objects/player_slot_lobby.tscn" id="1_v68ac"]
+
+[node name="MatchContainer" type="Control" node_paths=PackedStringArray("matchLabel", "playerSlot1", "playerSlot2", "readyButton")]
+custom_minimum_size = Vector2(450, 150)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_0skuy")
+matchLabel = NodePath("MatchLabel")
+playerSlot1 = NodePath("HBoxContainer/PlayerSlotLobby")
+playerSlot2 = NodePath("HBoxContainer/PlayerSlotLobby2")
+readyButton = NodePath("ReadyButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.5
+offset_top = -25.0
+offset_right = 212.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerSlotLobby" parent="HBoxContainer" instance=ExtResource("1_v68ac")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "vs"
+
+[node name="PlayerSlotLobby2" parent="HBoxContainer" instance=ExtResource("1_v68ac")]
+layout_mode = 2
+
+[node name="ReadyButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -40.0
+offset_right = 28.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ready"
+
+[node name="MatchLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 10.0
+offset_right = 31.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Match 1"

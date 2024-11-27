@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="LasagnaFighter"
-run/main_scene="res://scenes/test_scene.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/icon.svg"
+
+[autoload]
+
+LobbyClient="*res://scripts/LobbyClient.gd"
+NetworkHandler="*res://scripts/NetworkHandler.gd"
 
 [input]
 

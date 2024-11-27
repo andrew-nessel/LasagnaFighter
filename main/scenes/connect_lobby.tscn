@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5owqseaxk0ke"]
+
+[ext_resource type="Script" path="res://scripts/connect_lobby.gd" id="1_3jvmd"]
+
+[node name="ConnectLobby" type="Control" node_paths=PackedStringArray("address_text", "port_text")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3jvmd")
+address_text = NodePath("VBoxContainer/Address/AddressTextEdit")
+port_text = NodePath("VBoxContainer/Port/PortTextEdit")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 70.0
+text = "Connect To Lobby"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -224.0
+offset_right = 600.0
+offset_bottom = 176.0
+grow_vertical = 2
+
+[node name="Address" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Address"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 25.0
+text = "Address"
+
+[node name="AddressTextEdit" type="TextEdit" parent="VBoxContainer/Address"]
+layout_mode = 1
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 80.0
+text = "127.0.0.1"
+
+[node name="Port" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Port"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 25.0
+text = "Port"
+
+[node name="PortTextEdit" type="TextEdit" parent="VBoxContainer/Port"]
+layout_mode = 1
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 80.0
+text = "9999"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Connect"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -17.0
+grow_vertical = 0
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
