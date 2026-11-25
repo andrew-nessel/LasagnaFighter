@@ -5,6 +5,7 @@ class_name PlayerHandler extends Node
 @export var initialjumpAmount = 50
 @export var jumpLoss = 2
 @export var gravity = 12
+@export var health = 10
 @export var state : PlayerState
 @export var positionX : int
 @export var positionY : int
@@ -69,5 +70,21 @@ func _process(delta):
 func intPositionToFloatVector2() -> Vector2:
 	return Vector2(float(positionX), float(positionY))
 	
-func set_Floor(floor):
-	floorY = floor
+func set_Floor(_floor):
+	floorY = _floor
+
+func getCurrentPlayerFrame() -> PlayerFrame:
+	var pf = PlayerFrame.new()
+	pf.health = health
+	pf.positionX = positionX
+	pf.positionY = positionY
+	pf.state = state
+	return pf
+	
+
+func returnToPlayerFrame(pf : PlayerFrame) -> void:
+	health = pf.health
+	positionX = pf.positionX
+	positionY = pf.positionY
+	state = pf.state
+	return

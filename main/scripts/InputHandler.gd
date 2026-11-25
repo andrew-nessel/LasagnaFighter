@@ -52,7 +52,7 @@ func _input(event):
 				current_input.direction = InputHolder.Direction.LEFT
 	return
 
-func _process(delta):
+func _process(_delta):
 	
 	if Input.is_action_pressed("lightAttack"):
 		current_input.A_Press = true

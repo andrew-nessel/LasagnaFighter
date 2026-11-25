@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyisj7mrmwb6t"]
 
-[ext_resource type="Texture2D" uid="uid://clgdg0slvqief" path="res://assets/icon.svg" id="1_dunku"]
 [ext_resource type="Script" path="res://scripts/PlayerHandler.gd" id="1_qt8sv"]
+[ext_resource type="Texture2D" uid="uid://cxbf6uwy8ge6k" path="res://assets/1-0.png" id="2_3psus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45ptq"]
 size = Vector2(124, 131)
@@ -17,4 +17,6 @@ position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_45ptq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_dunku")
+texture = ExtResource("2_3psus")
+hframes = 8
+vframes = 6

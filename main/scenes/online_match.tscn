@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://8kjtti81c7ly"]
+
+[ext_resource type="Script" path="res://scenes/online_match_wrapper.gd" id="1_hy0if"]
+[ext_resource type="PackedScene" uid="uid://bmwpeoky4itsn" path="res://scenes/test_scene.tscn" id="1_qrepf"]
+
+[node name="OnlineMatch" type="Node2D" node_paths=PackedStringArray("match_wrapper")]
+script = ExtResource("1_hy0if")
+match_wrapper = NodePath("Node2D")
+
+[node name="Node2D" parent="." instance=ExtResource("1_qrepf")]

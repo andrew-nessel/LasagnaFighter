@@ -2,28 +2,65 @@
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_588cq"]
 
-[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("player_name_line_edit")]
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("top_menu", "online_menu", "player_name_line_edit")]
 script = ExtResource("1_588cq")
-player_name_line_edit = NodePath("PlayerNameTextEdit")
+top_menu = NodePath("TopMenu")
+online_menu = NodePath("OnlineMenu")
+player_name_line_edit = NodePath("OnlineMenu/PlayerNameTextEdit")
 
-[node name="ServerButton" type="Button" parent="."]
+[node name="TopMenu" type="Node2D" parent="."]
+
+[node name="SingleplayButton" type="Button" parent="TopMenu"]
 offset_right = 8.0
 offset_bottom = 8.0
+text = "Single Player"
+
+[node name="OnlineplayButton" type="Button" parent="TopMenu"]
+offset_left = 2.0
+offset_top = 35.0
+offset_right = 98.0
+offset_bottom = 66.0
+text = "Online Play"
+
+[node name="QuitButton" type="Button" parent="TopMenu"]
+offset_left = 5.0
+offset_top = 323.0
+offset_right = 47.0
+offset_bottom = 354.0
+text = "Quit"
+
+[node name="OnlineMenu" type="Node2D" parent="."]
+visible = false
+
+[node name="ServerButton" type="Button" parent="OnlineMenu"]
+offset_right = 58.0
+offset_bottom = 31.0
 text = "Server"
 
-[node name="ClientButton" type="Button" parent="."]
+[node name="ClientButton" type="Button" parent="OnlineMenu"]
 offset_left = 2.0
 offset_top = 36.0
 offset_right = 60.0
 offset_bottom = 67.0
 text = "Client"
 
-[node name="PlayerNameTextEdit" type="TextEdit" parent="."]
+[node name="OnlineBackButton" type="Button" parent="OnlineMenu"]
+offset_left = 2.0
+offset_top = 235.0
+offset_right = 47.0
+offset_bottom = 266.0
+text = "Back"
+
+[node name="PlayerNameTextEdit" type="TextEdit" parent="OnlineMenu"]
 offset_left = 341.0
 offset_top = 17.0
 offset_right = 798.0
 offset_bottom = 119.0
 placeholder_text = "player name"
 
-[connection signal="pressed" from="ServerButton" to="." method="_on_server_button_pressed"]
-[connection signal="pressed" from="ClientButton" to="." method="_on_client_button_pressed"]
+[connection signal="pressed" from="TopMenu/SingleplayButton" to="." method="_on_singleplay_button_pressed"]
+[connection signal="pressed" from="TopMenu/OnlineplayButton" to="." method="_on_onlineplay_button_pressed"]
+[connection signal="pressed" from="TopMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="OnlineMenu/ServerButton" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="OnlineMenu/ClientButton" to="." method="_on_client_button_pressed"]
+[connection signal="pressed" from="OnlineMenu/OnlineBackButton" to="." method="_on_online_back_button_pressed"]
